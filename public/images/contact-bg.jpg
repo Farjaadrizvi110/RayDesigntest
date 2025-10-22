@@ -1,0 +1,69 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="contactGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0fdf4;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#dcfce7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#bbf7d0;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="waves" width="100" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 0 10 Q 25 0 50 10 T 100 10" stroke="rgba(34,197,94,0.1)" stroke-width="1" fill="none"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="url(#contactGradient)"/>
+  
+  <!-- Wave pattern -->
+  <rect width="100%" height="100%" fill="url(#waves)"/>
+  
+  <!-- Communication elements -->
+  <g opacity="0.1">
+    <!-- Email icon -->
+    <g transform="translate(300, 250)">
+      <rect x="0" y="0" width="120" height="80" rx="8" fill="#22c55e" stroke="#16a34a" stroke-width="2"/>
+      <path d="M 10 20 L 60 50 L 110 20" stroke="#16a34a" stroke-width="3" fill="none"/>
+    </g>
+    
+    <!-- Phone icon -->
+    <g transform="translate(600, 230)">
+      <rect x="0" y="0" width="60" height="120" rx="12" fill="#22c55e" stroke="#16a34a" stroke-width="2"/>
+      <rect x="10" y="20" width="40" height="80" rx="6" fill="#ffffff"/>
+      <rect x="20" y="110" width="20" height="6" rx="3" fill="#16a34a"/>
+    </g>
+    
+    <!-- Chat bubbles -->
+    <g transform="translate(900, 200)">
+      <ellipse cx="0" cy="0" rx="60" ry="40" fill="#22c55e"/>
+      <polygon points="-20,30 -10,50 -30,40" fill="#22c55e"/>
+    </g>
+    
+    <g transform="translate(1100, 280)">
+      <ellipse cx="0" cy="0" rx="50" ry="35" fill="#22c55e"/>
+      <polygon points="20,25 30,45 10,35" fill="#22c55e"/>
+    </g>
+    
+    <!-- Location pin -->
+    <g transform="translate(1400, 220)">
+      <circle cx="0" cy="0" r="30" fill="#22c55e"/>
+      <circle cx="0" cy="-10" r="15" fill="#ffffff"/>
+      <polygon points="-10,20 0,40 10,20" fill="#22c55e"/>
+    </g>
+  </g>
+  
+  <!-- Connection lines -->
+  <g opacity="0.05">
+    <line x1="360" y1="290" x2="630" y2="290" stroke="#22c55e" stroke-width="2"/>
+    <line x1="660" y1="290" x2="900" y2="240" stroke="#22c55e" stroke-width="2"/>
+    <line x1="950" y1="240" x2="1100" y2="315" stroke="#22c55e" stroke-width="2"/>
+    <line x1="1150" y1="315" x2="1400" y2="250" stroke="#22c55e" stroke-width="2"/>
+  </g>
+  
+  <!-- Geometric elements -->
+  <circle cx="200" cy="700" r="100" fill="rgba(34,197,94,0.06)" opacity="0.7"/>
+  <circle cx="1700" cy="300" r="80" fill="rgba(34,197,94,0.05)" opacity="0.6"/>
+  <polygon points="1200,800 1300,900 1100,900" fill="rgba(34,197,94,0.04)" opacity="0.5"/>
+  
+  <!-- Floating elements -->
+  <rect x="1600" y="700" width="50" height="50" rx="8" fill="rgba(34,197,94,0.08)" opacity="0.4" transform="rotate(20 1625 725)"/>
+  <rect x="100" y="400" width="40" height="40" rx="6" fill="rgba(34,197,94,0.06)" opacity="0.3" transform="rotate(-25 120 420)"/>
+</svg>
