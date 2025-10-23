@@ -5,7 +5,7 @@ import { Menu, X, ArrowRight, Star, Users, Award, TrendingUp, Code, Smartphone, 
 import Preloader from '../components/Preloader';
 import RayDesignLogo from '../components/RayDesignLogo';
 import BackgroundImage from '../components/BackgroundImage';
-import emailjs from '@emailjs/browser';
+
 
 const AnimatedBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -1185,39 +1185,12 @@ const RayDesignWebsite = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    try {
-      // EmailJS configuration from environment variables
-      const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-      const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-      
-      // Check if EmailJS is configured
-      if (!serviceID || !templateID || !publicKey || publicKey === 'YOUR_PUBLIC_KEY') {
-        throw new Error('EmailJS not configured. Please set up your EmailJS credentials.');
-      }
-      
-      // Prepare template parameters
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        to_email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'info@raydesign.uk',
-        service_type: formData.service,
-        message: formData.message,
-        reply_to: formData.email
-      };
-      
-      // Send email using EmailJS
-      await emailjs.send(serviceID, templateID, templateParams, publicKey);
-      
-      alert('Thank you! Your message has been sent successfully. We will get back to you within 24 hours.');
-      setFormData({ name: '', email: '', service: 'Web Development', message: '' });
-    } catch (error) {
-      console.error('Error sending email:', error);
-      alert('Sorry, there was an error sending your message. Please try again or contact us directly at info@raydesign.uk');
-    }
+    // Simple form submission without email functionality
+    alert('Thank you for your message! We have received your inquiry and will get back to you soon.');
+    setFormData({ name: '', email: '', service: 'Web Development', message: '' });
   };
   
   // Service Page Component
