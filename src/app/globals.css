@@ -48,6 +48,18 @@
     color: #000000 !important;
   }
   
+  /* Black text for all span elements */
+  span {
+    color: #000000 !important;
+  }
+  
+  /* Ensure consistency across all states for spans */
+  span:hover,
+  span:active,
+  span:focus {
+    color: #000000 !important;
+  }
+  
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }

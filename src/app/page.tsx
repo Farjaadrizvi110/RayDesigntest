@@ -2,130 +2,23 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ArrowRight, Star, Users, Award, TrendingUp, Code, Smartphone, ShoppingCart, Search, Target, Share2, Palette, Lightbulb, Zap, CheckCircle, Mail, Phone, MapPin, Sparkles, Rocket, Globe, Monitor, Cpu, Database, Cloud, Layout, PenTool, BarChart3, MessageSquare, ChevronRight, ChevronLeft } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import Preloader from '../components/Preloader';
 import RayDesignLogo from '../components/RayDesignLogo';
 import BackgroundImage from '../components/BackgroundImage';
 
-
-const AnimatedBackground = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    
-    interface ParticleType {
-      x: number;
-      y: number;
-      size: number;
-      speedX: number;
-      speedY: number;
-      opacity: number;
-      update(): void;
-      draw(): void;
-    }
-    
-    const particles: ParticleType[] = [];
-    const particleCount = 50;
-    
-    class Particle implements ParticleType {
-      x: number;
-      y: number;
-      size: number;
-      speedX: number;
-      speedY: number;
-      opacity: number;
-      
-      constructor(canvasWidth: number, canvasHeight: number) {
-        this.x = Math.random() * canvasWidth;
-        this.y = Math.random() * canvasHeight;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
-        this.opacity = Math.random() * 0.5 + 0.2;
-      }
-      
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        
-        if (canvas && this.x > canvas.width) this.x = 0;
-        if (canvas && this.x < 0) this.x = canvas.width;
-        if (canvas && this.y > canvas.height) this.y = 0;
-        if (canvas && this.y < 0) this.y = canvas.height;
-      }
-      
-      draw() {
-        if (!ctx) return;
-        
-        ctx.fillStyle = `rgba(30, 64, 175, ${this.opacity})`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-    
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle(canvas.width, canvas.height));
-    }
-    
-    function animate() {
-      if (!canvas || !ctx) return;
-      
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      particles.forEach(particle => {
-        particle.update();
-        particle.draw();
-      });
-      
-      particles.forEach((a, i) => {
-        particles.slice(i + 1).forEach(b => {
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          
-          if (distance < 150) {
-            ctx.strokeStyle = `rgba(59, 130, 246, ${0.2 * (1 - distance / 150)})`;
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
-          }
-        });
-      });
-      
-      requestAnimationFrame(animate);
-    }
-    
-    animate();
-    
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-  
-  return <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />;
-};
+const AnimatedBackground = dynamic(() => import('../components/AnimatedBackground'), { ssr: false });
 
 // Hero Illustration Component
 const HeroIllustration = () => (
   <div className="relative w-full h-full">
     <img 
       src="https://media.istockphoto.com/id/1371339413/photo/co-working-team-meeting-concept-businessman-using-smart-phone-and-digital-tablet-and-laptop.jpg?s=612x612&w=0&k=20&c=ysEsVw3q2axYt3oVZAuQjtHRlN3lY-U_e0ikK5yKIXQ="
-      alt="Co-working team meeting concept - businessman using smart phone and digital tablet and laptop"
+      alt="Professional team collaboration - modern digital workspace with laptops, tablets and smartphones showcasing web development and digital marketing solutions"
       className="w-full h-full object-cover rounded-2xl shadow-2xl"
+      loading="lazy"
+      width="612"
+      height="612"
     />
     <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 via-transparent to-transparent rounded-2xl"></div>
   </div>
@@ -209,9 +102,11 @@ const ProjectShowcase = ({ projects, visibleSections }: ProjectShowcaseProps) =>
         <div className="relative overflow-hidden">
           <img 
             src={project.imageUrl} 
-            alt={`Project ${index + 1}`}
+            alt={`${project.title} - ${project.description} - Professional web development project showcase`}
             className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
             loading="lazy"
+            width="400"
+            height="256"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <div className="absolute bottom-6 left-6 right-6">
@@ -314,7 +209,6 @@ const RayDesignWebsite = () => {
       description: "Full-stack web solutions from simple websites to complex enterprise applications.",
       color: "from-blue-500 via-blue-600 to-blue-700",
       image: <Monitor className="w-16 h-16" />,
-      backgroundImage: "https://plus.unsplash.com/premium_photo-1685086785077-ff65bf749544?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1932",
       category: "MAIN SERVICES",
       subServices: [
         {
@@ -1214,16 +1108,8 @@ const RayDesignWebsite = () => {
     return (
       <div 
         className="min-h-screen pt-32 pb-20 relative"
-        style={service.backgroundImage ? {
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${service.backgroundImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
-        } : {}}
       >
-        {!service.backgroundImage && (
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50"></div>
-        )}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <button 
           onClick={navigateToHome}
@@ -1239,7 +1125,7 @@ const RayDesignWebsite = () => {
             <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 shadow-lg`}>
               <div className="text-white">{service.icon}</div>
             </div>
-            <h1 className="text-5xl font-bold text-white mb-6">{service.title}</h1>
+            <h1 className="text-5xl font-bold text-black mb-6">{service.title}</h1>
             <p className="text-xl text-black leading-relaxed mb-8">{service.description}</p>
             
             {/* Stats */}
@@ -1443,6 +1329,223 @@ const RayDesignWebsite = () => {
             </div>
           </div>
         )}
+        
+        {/* Website Packages */}
+        <div className="bg-white rounded-3xl p-10 shadow-xl border border-slate-200 mb-12">
+          <div className="text-center mb-12">
+            <h3 className="text-4xl font-bold text-slate-900 mb-4">Website Packages</h3>
+            <p className="text-xl text-slate-600">Choose a flexible web design payment option to suit you!</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {/* Standard Package */}
+            <div className="bg-white rounded-2xl border-2 border-slate-200 p-8 hover:border-blue-300 transition-all duration-300 hover:shadow-lg">
+              <div className="text-center mb-6">
+                <h4 className="text-2xl font-bold text-slate-900 mb-2">Standard</h4>
+                <p className="text-slate-600 mb-4">Ideal for a startup site</p>
+                <div className="text-4xl font-bold text-blue-600 mb-6">£800</div>
+              </div>
+              
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Up to 8 pages</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Free domain name</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">3 email addresses</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Fully responsive website</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Dedicated web designer</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Free 12 months hosting</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Support & updates</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">SEO friendly</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Free SSL certificate</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Blog & contact forms</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <X className="w-5 h-5 text-red-500 flex-shrink-0" />
+                  <span className="text-slate-500 line-through">Content management system</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <X className="w-5 h-5 text-red-500 flex-shrink-0" />
+                  <span className="text-slate-500 line-through">Ecommerce</span>
+                </li>
+              </ul>
+              
+              <button 
+                onClick={() => { setCurrentPage('home'); setTimeout(() => scrollToSection('contact'), 100); }}
+                className="w-full bg-slate-900 text-white py-3 px-6 rounded-lg font-semibold hover:bg-slate-800 transition-colors flex items-center justify-center gap-2"
+              >
+                Get in Touch
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Professional Package */}
+            <div className="bg-white rounded-2xl border-2 border-black-400 p-8 relative hover:border-blue-500 transition-all duration-300 hover:shadow-xl transform hover:scale-105">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">Most popular!</span>
+              </div>
+              
+              <div className="text-center mb-6 mt-4">
+                <h4 className="text-2xl font-bold text-slate-900 mb-2">Professional</h4>
+                <div className="text-4xl font-bold text-blue-600 mb-6">£1200</div>
+              </div>
+              
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Up to 13 pages</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Free domain name</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">7 email addresses</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Fully responsive website</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Dedicated web designer</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Free 12 months hosting</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Support & updates</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">SEO friendly</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Free SSL certificate</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Blog & contact forms</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Content management system</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <X className="w-5 h-5 text-red-500 flex-shrink-0" />
+                  <span className="text-slate-400 line-through">Ecommerce</span>
+                </li>
+              </ul>
+              
+              <button 
+                onClick={() => { setCurrentPage('home'); setTimeout(() => scrollToSection('contact'), 100); }}
+                className="w-full bg-blue-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-600 transition-colors flex items-center justify-center gap-2"
+              >
+                Get in Touch
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Business Package */}
+            <div className="bg-white rounded-2xl border-2 border-slate-200 p-8 hover:border-blue-300 transition-all duration-300 hover:shadow-lg">
+              <div className="text-center mb-6">
+                <h4 className="text-2xl font-bold text-slate-900 mb-2">Business</h4>
+                <p className="text-slate-600 mb-4">Feature packed</p>
+                <div className="text-4xl font-bold text-blue-600 mb-6">£1800</div>
+              </div>
+              
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Up to 30 information pages</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Free domain name</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">12 email addresses</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Fully responsive website</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Dedicated senior web designer</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Free 12 months hosting</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Support & updates</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">SEO friendly</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Free SSL certificate</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Blog & contact forms</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Content management system</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Ecommerce</span>
+                </li>
+              </ul>
+              
+              <button 
+                onClick={() => { setCurrentPage('home'); setTimeout(() => scrollToSection('contact'), 100); }}
+                className="w-full bg-slate-900 text-white py-3 px-6 rounded-lg font-semibold hover:bg-slate-800 transition-colors flex items-center justify-center gap-2"
+              >
+                Get in Touch
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
         
         {/* CTA */}
         <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl p-12 text-center text-white shadow-xl relative overflow-hidden">
@@ -1774,13 +1877,8 @@ const RayDesignWebsite = () => {
         src="/images/hero-bg.jpg"
         alt="Hero background with abstract technology elements"
         className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden"
-        overlayOpacity={0.7}
-        overlayColor="rgba(30, 64, 175, 0.1)"
-        fallbackColor="#f8fafc"
-        priority={true}
-        position="center"
       >
-        <section id="home" ref={heroRef} className="w-full">
+        <header id="home" ref={heroRef} className="w-full">
         <AnimatedBackground />
         
         <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-transparent to-blue-100/30"></div>
@@ -1864,7 +1962,7 @@ const RayDesignWebsite = () => {
             </div>
           </div>
         </div>
-        </section>
+        </header>
       </BackgroundImage>
 
       {/* Services Section */}
@@ -1872,10 +1970,6 @@ const RayDesignWebsite = () => {
         src="/images/services-bg.jpg"
         alt="Services background with professional design elements"
         className="py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
-        overlayOpacity={0.8}
-        overlayColor="white"
-        fallbackColor="#ffffff"
-        position="center"
       >
         <section id="services" className="w-full">
         <svg className="absolute w-full h-full opacity-3" xmlns="http://www.w3.org/2000/svg">
@@ -2009,10 +2103,6 @@ const RayDesignWebsite = () => {
         src="/images/about-bg.jpg"
         alt="About section background with warm professional elements"
         className="py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
-        overlayOpacity={0.85}
-        overlayColor="#f8fafc"
-        fallbackColor="#f8fafc"
-        position="center"
       >
         <section id="about" className="w-full">
         <div className="absolute inset-0">
@@ -2110,10 +2200,6 @@ const RayDesignWebsite = () => {
         src="/images/portfolio-bg.jpg"
         alt="Portfolio section background with creative showcase elements"
         className="py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
-        overlayOpacity={0.9}
-        overlayColor="white"
-        fallbackColor="#ffffff"
-        position="center"
       >
         <section id="portfolio" className="w-full">
         <div className="absolute top-20 left-10 w-96 h-96 bg-blue-100/50 rounded-full blur-3xl animate-float"></div>
@@ -2202,10 +2288,6 @@ const RayDesignWebsite = () => {
         src="/images/about-bg.jpg"
         alt="Testimonials section background with warm professional elements"
         className="py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
-        overlayOpacity={0.85}
-        overlayColor="#f8fafc"
-        fallbackColor="#f8fafc"
-        position="center"
       >
         <section id="testimonials" className="w-full">
         
@@ -2254,10 +2336,6 @@ const RayDesignWebsite = () => {
         src="/images/contact-bg.jpg"
         alt="Contact section background with communication elements"
         className="py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
-        overlayOpacity={0.9}
-        overlayColor="white"
-        fallbackColor="#ffffff"
-        position="center"
       >
         <section id="contact" className="w-full">
         <div className="absolute inset-0">
