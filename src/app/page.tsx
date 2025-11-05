@@ -7,7 +7,7 @@ import Preloader from '../components/Preloader';
 import RayDesignLogo from '../components/RayDesignLogo';
 import BackgroundImage from '../components/BackgroundImage';
 
-const AnimatedBackground = dynamic(() => import('../components/AnimatedBackground'), { ssr: false });
+import AnimatedBackground from '../components/AnimatedBackground';
 
 // Hero Illustration Component
 const HeroIllustration = () => (
@@ -1320,17 +1320,336 @@ const RayDesignWebsite = () => {
         {service.technologies && (
           <div className="bg-white rounded-3xl p-10 shadow-xl border border-slate-200 mb-12">
             <h3 className="text-3xl font-bold text-slate-900 mb-8 text-center">Technologies & Tools We Use</h3>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4 mb-10">
               {service.technologies?.map((tech: any, idx: number) => (
                 <div key={idx} className="px-6 py-3 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full border border-blue-200 text-blue-700 font-semibold hover:bg-blue-600 hover:text-white transition-all cursor-default shadow-sm hover:shadow-md">
                   {tech}
                 </div>
               ))}
             </div>
+            
+            {/* Custom Development Section - Only for E-Commerce Solutions */}
+            {service.id === 'ecommerce' && (
+              <div className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl p-8 border border-slate-200">
+                <div className="text-center mb-6">
+                  <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                    <Rocket className="w-4 h-4" />
+                    Custom Development
+                  </div>
+                  <h4 className="text-2xl font-bold text-slate-900 mb-3">Tailored Solutions for Your Vision</h4>
+                  <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                    Every business is unique, and so are its requirements. Our custom development services leverage 
+                    <span className="font-semibold text-blue-600"> cutting-edge technologies</span> and 
+                    <span className="font-semibold text-purple-600"> innovative frameworks</span> to create 
+                    bespoke solutions that perfectly align with your specific needs and goals.
+                  </p>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                  <div className="text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Zap className="w-6 h-6 text-white" />
+                    </div>
+                    <h5 className="font-bold text-slate-900 mb-2">Lightning Fast</h5>
+                    <p className="text-sm text-slate-600">Optimized performance with modern tech stack</p>
+                  </div>
+                  
+                  <div className="text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all">
+                    <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Cpu className="w-6 h-6 text-white" />
+                    </div>
+                    <h5 className="font-bold text-slate-900 mb-2">AI-Powered</h5>
+                    <p className="text-sm text-slate-600">Next-gen solutions with intelligent automation</p>
+                  </div>
+                  
+                  <div className="text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all">
+                    <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Cloud className="w-6 h-6 text-white" />
+                    </div>
+                    <h5 className="font-bold text-slate-900 mb-2">Cloud Native</h5>
+                    <p className="text-sm text-slate-600">Scalable architecture for future growth</p>
+                  </div>
+                </div>
+                
+                <div className="text-center mt-8">
+                  <p className="text-slate-700 mb-4">
+                    <span className="font-semibold">Pricing:</span> Custom development projects are priced based on your specific requirements, 
+                    complexity, and timeline. We provide transparent, competitive quotes tailored to your budget and vision.
+                  </p>
+                  <div className="inline-flex items-center gap-2 text-blue-600 font-semibold">
+                    <Sparkles className="w-5 h-5" />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* E-Commerce Excellence Section - Only for Digital Marketing */}
+            {service.id === 'digital-marketing' && (
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-200 mt-6">
+                <div className="text-center mb-8">
+                  <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                    <ShoppingCart className="w-4 h-4" />
+                    E-Commerce Excellence
+                  </div>
+                  <h4 className="text-2xl font-bold text-slate-900 mb-3">Drive Your Online Business Forward</h4>
+                  <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                    Transform your digital presence with our comprehensive e-commerce solutions designed to 
+                    <span className="font-semibold text-blue-600"> maximize conversions</span> and 
+                    <span className="font-semibold text-indigo-600"> enhance customer experience</span>.
+                  </p>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all border border-slate-100">
+                    <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mb-4">
+                      <CheckCircle className="w-6 h-6 text-white" />
+                    </div>
+                    <h5 className="font-bold text-slate-900 mb-2">Effortless Management</h5>
+                    <p className="text-sm text-slate-600">Intuitive dashboard for seamless product updates, sales tracking, and order management with real-time analytics.</p>
+                  </div>
+                  
+                  <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all border border-slate-100">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mb-4">
+                      <Users className="w-6 h-6 text-white" />
+                    </div>
+                    <h5 className="font-bold text-slate-900 mb-2">Premium Experience</h5>
+                    <p className="text-sm text-slate-600">Deliver exceptional customer journeys with intuitive navigation, detailed product showcases, and secure checkout processes.</p>
+                  </div>
+                  
+                  <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all border border-slate-100">
+                    <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mb-4">
+                      <Target className="w-6 h-6 text-white" />
+                    </div>
+                    <h5 className="font-bold text-slate-900 mb-2">Lead Generation</h5>
+                    <p className="text-sm text-slate-600">Strategic lead capture through email forms, promotional campaigns, and intelligent upselling opportunities.</p>
+                  </div>
+                  
+                  <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all border border-slate-100">
+                    <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center mb-4">
+                      <Share2 className="w-6 h-6 text-white" />
+                    </div>
+                    <h5 className="font-bold text-slate-900 mb-2">Audience Engagement</h5>
+                    <p className="text-sm text-slate-600">Build lasting relationships with product reviews, social integration, and interactive features that foster brand loyalty.</p>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+                  <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all border border-slate-100">
+                    <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center mb-4">
+                      <Monitor className="w-6 h-6 text-white" />
+                    </div>
+                    <h5 className="font-bold text-slate-900 mb-2">Responsive Design</h5>
+                    <p className="text-sm text-slate-600">Flawless performance across all devices with adaptive layouts that ensure optimal shopping experiences everywhere.</p>
+                  </div>
+                  
+                  <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all border border-slate-100">
+                    <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mb-4">
+                      <Search className="w-6 h-6 text-white" />
+                    </div>
+                    <h5 className="font-bold text-slate-900 mb-2">SEO Optimized</h5>
+                    <p className="text-sm text-slate-600">Enhanced visibility with optimized product descriptions, meta tags, and structured data for higher search rankings.</p>
+                  </div>
+                  
+                  <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all border border-slate-100">
+                    <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center mb-4">
+                      <Award className="w-6 h-6 text-white" />
+                    </div>
+                    <h5 className="font-bold text-slate-900 mb-2">Competitive Pricing</h5>
+                    <p className="text-sm text-slate-600">Affordable, scalable solutions tailored to your budget with transparent pricing and flexible payment options.</p>
+                  </div>
+                  
+                  <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all border border-slate-100">
+                    <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-full flex items-center justify-center mb-4">
+                      <MessageSquare className="w-6 h-6 text-white" />
+                    </div>
+                    <h5 className="font-bold text-slate-900 mb-2">Expert Support</h5>
+                    <p className="text-sm text-slate-600">Dedicated support team providing 24/7 assistance to ensure your e-commerce platform runs smoothly and efficiently.</p>
+                  </div>
+                </div>
+                
+                <div className="text-center mt-8 p-6 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl text-white">
+                  <h5 className="font-bold text-xl mb-2">Ready to Transform Your Business?</h5>
+                  <p className="text-blue-100 mb-4">Join hundreds of successful businesses that have elevated their online presence with our proven e-commerce strategies.</p>
+                  <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold">
+                    <Sparkles className="w-4 h-4" />
+                    Get Started Today
+                    Let&apos;s build something extraordinary together
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
         
-        {/* Website Packages */}
+        {/* SEO Packages - Only for SEO Services */}
+        {service.id === 'seo' && (
+        <div className="bg-white rounded-3xl p-10 shadow-xl border border-slate-200 mb-12">
+          <div className="text-center mb-12">
+            <h3 className="text-4xl font-bold text-slate-900 mb-4">SEO Packages</h3>
+            <p className="text-xl text-slate-600">Integrating Search Engine Optimization (SEO) into your marketing strategy is crucial for maximizing your website&apos;s performance and ensuring it actively contributes to your business goals.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {/* Starter Package */}
+            <div className="bg-white rounded-2xl border-2 border-slate-200 p-8 hover:border-blue-300 transition-all duration-300 hover:shadow-lg">
+              <div className="text-center mb-6">
+                <h4 className="text-2xl font-bold text-slate-900 mb-2">Starter</h4>
+                <p className="text-slate-600 mb-4">Have an online presence</p>
+                <div className="text-4xl font-bold text-blue-600 mb-6">£200 <span className="text-lg text-slate-350">/month</span></div>
+              </div>
+              
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">3 optimised keywords</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">Monthly reporting</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">Rank tracking</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">Onsite optimisation</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">Keyword research</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">Competitor analysis</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <X className="w-5 h-5 text-slate-400 flex-shrink-0" />
+                  <span className="text-slate-400">Link building</span>
+                </div>
+                {/* <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">No minimum term</span>
+                </div> */}
+              </div>
+              
+              <button 
+                onClick={() => { setCurrentPage('home'); setTimeout(() => scrollToSection('contact'), 100); }}
+                className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-all"
+              >
+                Get in Touch
+              </button>
+            </div>
+
+            {/* Business Package */}
+            <div className="bg-white rounded-2xl border-2 border-blue-500 p-8 hover:border-blue-600 transition-all duration-300 hover:shadow-lg relative">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">Most popular!</span>
+              </div>
+              <div className="text-center mb-6">
+                <h4 className="text-2xl font-bold text-slate-900 mb-2">Business</h4>
+                <div className="text-4xl font-bold text-blue-600 mb-6">£350 <span className="text-lg text-slate-500">/month</span></div>
+              </div>
+              
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">6 optimised keywords</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">Monthly reporting</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">Rank tracking</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">Onsite optimisation</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">Keyword research</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">Competitor analysis</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">Link building</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">No minimum term</span>
+                </div>
+              </div>
+              
+              <button 
+                onClick={() => { setCurrentPage('home'); setTimeout(() => scrollToSection('contact'), 100); }}
+                className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-all"
+              >
+                Get in Touch
+              </button>
+            </div>
+
+            {/* Professional Package */}
+            <div className="bg-white rounded-2xl border-2 border-slate-200 p-8 hover:border-blue-300 transition-all duration-300 hover:shadow-lg">
+              <div className="text-center mb-6">
+                <h4 className="text-2xl font-bold text-slate-900 mb-2">Professional</h4>
+                <p className="text-slate-600 mb-4">Increase page rankings</p>
+                <div className="text-4xl font-bold text-blue-600 mb-6">£650 <span className="text-lg text-slate-500">/month</span></div>
+              </div>
+              
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">10 optimised keywords</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">Monthly reporting</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">Rank tracking</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">Onsite optimisation</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">Keyword research</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">Competitor analysis</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">Link building</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700">No minimum term</span>
+                </div>
+              </div>
+              
+              <button 
+                onClick={() => { setCurrentPage('home'); setTimeout(() => scrollToSection('contact'), 100); }}
+                className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-all"
+              >
+                Get in Touch
+              </button>
+            </div>
+          </div>
+        </div>
+        )}
+        
+        {/* Website Packages - Only for Web Development */}
+        {service.id === 'web-application' && (
         <div className="bg-white rounded-3xl p-10 shadow-xl border border-slate-200 mb-12">
           <div className="text-center mb-12">
             <h3 className="text-4xl font-bold text-slate-900 mb-4">Website Packages</h3>
@@ -1546,6 +1865,438 @@ const RayDesignWebsite = () => {
             </div>
           </div>
         </div>
+        )}
+
+        {/* PPC Packages - Only show for PPC Management service */}
+        {service.id === 'ppc' && (
+        <div className="bg-white rounded-3xl p-10 shadow-xl border border-slate-200 mb-12">
+          <div className="text-center mb-12">
+            <h3 className="text-4xl font-bold text-slate-900 mb-4">PPC Packages</h3>
+            <p className="text-xl text-slate-600">Targeted Pay Per Click campaigns achieving results and ROI.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {/* Standard Package */}
+            <div className="bg-white rounded-2xl border-2 border-slate-200 p-8 hover:border-blue-300 transition-all duration-300 hover:shadow-lg">
+              <div className="text-center mb-6">
+                <h4 className="text-2xl font-bold text-slate-900 mb-2">Standard</h4>
+                <p className="text-slate-600 mb-4">Entry level PPC management</p>
+                <div className="text-4xl font-bold text-blue-600 mb-6">£150 <span className="text-lg text-slate-600">/month</span></div>
+                <p className="text-sm text-slate-500 mb-6">Up to £500 ad spend</p>
+              </div>
+              
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Google Ads account setup</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Google Ads campaign creation</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Keyword research</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Ads copy creation</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Landing page creation</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Conversion tracking setup</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Google search ads</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Ongoing optimisation</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Monthly reporting</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Negative keyword research</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Match modified ad groups</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Bidding strategy optimisation</span>
+                </li>
+              </ul>
+              
+              <button 
+                onClick={() => { setCurrentPage('home'); setTimeout(() => scrollToSection('contact'), 100); }}
+                className="w-full bg-slate-900 text-white py-3 px-6 rounded-lg font-semibold hover:bg-slate-800 transition-colors flex items-center justify-center gap-2"
+              >
+                Get in Touch
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Professional Package */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-blue-500 hover:shadow-xl transition-all duration-300 relative">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span className="bg-blue-500 text-white px-6 py-2 rounded-full text-sm font-semibold">Most Popular</span>
+              </div>
+              
+              <div className="text-center mb-6">
+                <h4 className="text-2xl font-bold text-slate-900 mb-2">Professional</h4>
+                <p className="text-slate-600 mb-4">Small business PPC management</p>
+                <div className="text-4xl font-bold text-blue-600 mb-6">£250 <span className="text-lg text-slate-600">/month</span></div>
+                <p className="text-sm text-slate-500 mb-6">Up to £1000 ad spend</p>
+              </div>
+              
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Google Ads account setup</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Google Ads campaign creation</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Keyword research</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Ads copy creation</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Landing page creation</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Conversion tracking setup</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Google search ads</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Ongoing optimisation</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Monthly reporting</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Negative keyword research</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Match modified ad groups</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Bidding strategy optimisation</span>
+                </li>
+              </ul>
+              
+              <button 
+                onClick={() => { setCurrentPage('home'); setTimeout(() => scrollToSection('contact'), 100); }}
+                className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+              >
+                Get in Touch
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Business Package */}
+            <div className="bg-white rounded-2xl border-2 border-slate-200 p-8 hover:border-blue-300 transition-all duration-300 hover:shadow-lg">
+              <div className="text-center mb-6">
+                <h4 className="text-2xl font-bold text-slate-900 mb-2">Business</h4>
+                <p className="text-slate-600 mb-4">Advanced PPC management</p>
+                <div className="text-4xl font-bold text-blue-600 mb-6">£400 <span className="text-lg text-slate-600">/month</span></div>
+                <p className="text-sm text-slate-500 mb-6">Up to £3000 ad spend</p>
+              </div>
+              
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Google Ads account setup</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Google Ads campaign creation</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Keyword research</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Ads copy creation</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Landing page creation</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Conversion tracking setup</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Google search ads</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Ongoing optimisation</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Monthly reporting</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Negative keyword research</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Match modified ad groups</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Bidding strategy optimisation</span>
+                </li>
+              </ul>
+              
+              <button 
+                onClick={() => { setCurrentPage('home'); setTimeout(() => scrollToSection('contact'), 100); }}
+                className="w-full bg-slate-900 text-white py-3 px-6 rounded-lg font-semibold hover:bg-slate-800 transition-colors flex items-center justify-center gap-2"
+              >
+                Get in Touch
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+        )}
+
+        {/* Social Media Packages - Only show for Social Media service */}
+        {service.id === 'social-media' && (
+        <div className="bg-white rounded-3xl p-10 shadow-xl border border-slate-200 mb-12">
+          <div className="text-center mb-12">
+            <h3 className="text-4xl font-bold text-slate-900 mb-4">Social Media Packages</h3>
+            <p className="text-xl text-slate-600">Explore our suite of social media solutions, crafted to meet the unique goals of your business</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {/* Update my feeds Package */}
+            <div className="bg-white rounded-2xl border-2 border-slate-200 p-8 hover:border-blue-300 transition-all duration-300 hover:shadow-lg">
+              <div className="text-center mb-6">
+                <h4 className="text-2xl font-bold text-slate-900 mb-2">Update my feeds</h4>
+                <p className="text-slate-600 mb-4">Be fresh, be social</p>
+                <div className="text-4xl font-bold text-blue-600 mb-6">£200 <span className="text-lg text-slate-600">/month</span></div>
+              </div>
+              
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">2 social networks managed</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Social account setup</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">16 unique Facebook posts per month</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">10 unique Instagram posts per week</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Cover / featured image updates</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Monthly progress report</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Increase in reach</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Detailed competitor research</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">£150 of Facebook ads</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Boost engagement – commenting, liking and following prospective customers pages</span>
+                </li>
+              </ul>
+              
+              <button 
+                onClick={() => { setCurrentPage('home'); setTimeout(() => scrollToSection('contact'), 100); }}
+                className="w-full bg-slate-900 text-white py-3 px-6 rounded-lg font-semibold hover:bg-slate-800 transition-colors flex items-center justify-center gap-2"
+              >
+                Get in Touch
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Expand your reach Package */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-blue-500 hover:shadow-xl transition-all duration-300 relative">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span className="bg-blue-500 text-white px-6 py-2 rounded-full text-sm font-semibold">Most Popular</span>
+              </div>
+              
+              <div className="text-center mb-6">
+                <h4 className="text-2xl font-bold text-slate-900 mb-2">Expand your reach</h4>
+                <p className="text-slate-600 mb-4">Engage & grow followers</p>
+                <div className="text-4xl font-bold text-blue-600 mb-6">£350 <span className="text-lg text-slate-600">/month</span></div>
+              </div>
+              
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">3 social networks managed</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Social account setup</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">20 unique Facebook posts per month</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">18 unique Instagram posts per week</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">14 unique Twitter posts per week</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Cover / featured image updates</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Monthly progress report</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Increase in reach</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Detailed competitor research</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">£200 of Facebook ads</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Boost engagement – commenting, liking and following prospective customers pages</span>
+                </li>
+              </ul>
+              
+              <button 
+                onClick={() => { setCurrentPage('home'); setTimeout(() => scrollToSection('contact'), 100); }}
+                className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+              >
+                Get in Touch
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Fully managed Package */}
+            <div className="bg-white rounded-2xl border-2 border-slate-200 p-8 hover:border-blue-300 transition-all duration-300 hover:shadow-lg">
+              <div className="text-center mb-6">
+                <h4 className="text-2xl font-bold text-slate-900 mb-2">Fully managed</h4>
+                <p className="text-slate-600 mb-4">Increase your revenue</p>
+                <div className="text-4xl font-bold text-blue-600 mb-6">£700 <span className="text-lg text-slate-600">/month</span></div>
+              </div>
+              
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">4 social networks managed</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Social account setup</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">30 unique Facebook posts per month</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">25 unique Instagram posts per week</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">20 unique Twitter posts per week</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">23 unique Linkedin posts per week</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Cover / featured image updates</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Monthly progress report</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Increase in reach</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Detailed competitor research</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">£250 of Facebook ads</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-slate-700">Boost engagement – commenting, liking and following prospective customers pages</span>
+                </li>
+              </ul>
+              
+              <button 
+                onClick={() => { setCurrentPage('home'); setTimeout(() => scrollToSection('contact'), 100); }}
+                className="w-full bg-slate-900 text-white py-3 px-6 rounded-lg font-semibold hover:bg-slate-800 transition-colors flex items-center justify-center gap-2"
+              >
+                Get in Touch
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+        )}
         
         {/* CTA */}
         <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl p-12 text-center text-white shadow-xl relative overflow-hidden">
@@ -1907,10 +2658,10 @@ const RayDesignWebsite = () => {
                 <span className="text-sm font-medium text-slate-700">Trusted by 500+ businesses worldwide</span>
               </div>
               
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-slide-up text-black" style={{ animationDelay: '0.1s' }}>
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-semibold mb-6 leading-tight tracking-tight animate-slide-up text-slate-900" style={{ animationDelay: '0.1s' }}>
                 Digital Innovation
                 <br />
-                <span className="text-blue-600">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-600 font-extrabold drop-shadow-sm">
                   Redefined
                 </span>
               </h1>
@@ -2469,11 +3220,11 @@ const RayDesignWebsite = () => {
                 RayDesign Technologies
               </h3>
             </div>
-            <p className="text-slate-400 mb-8 text-lg">Digital Innovation Partner</p>
+            <p className="text-slate-400 mb-8 text-lg text-white">Digital Innovation Partner</p>
             <div className="flex items-center justify-center gap-8 text-sm text-slate-500">
               <span>© 2025 RayDesign Technologies</span>
               <span>•</span>
-              <span>All Rights Reserved</span>
+              <span className='text-white'>All Rights Reserved</span>
             </div>
           </div>
         </div>

@@ -59,7 +59,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete, duration = 3000 }) =>
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
       {/* Animated Background Particles */}
       <div className="absolute inset-0">
         {particles.map((particle, i) => (
@@ -78,13 +78,13 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete, duration = 3000 }) =>
 
       {/* Floating Geometric Shapes */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-20 sm:w-32 h-20 sm:h-32 border border-blue-400/20 rounded-full animate-spin-slow" />
-        <div className="absolute top-3/4 right-1/4 w-16 sm:w-24 h-16 sm:h-24 border border-purple-400/20 rotate-45 animate-pulse" />
-        <div className="absolute bottom-1/4 left-1/3 w-12 sm:w-16 h-12 sm:h-16 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg animate-bounce" />
+        <div className="absolute w-20 h-20 border rounded-full top-1/4 left-1/4 sm:w-32 sm:h-32 border-blue-400/20 animate-spin-slow" />
+        <div className="absolute w-16 h-16 rotate-45 border top-3/4 right-1/4 sm:w-24 sm:h-24 border-purple-400/20 animate-pulse" />
+        <div className="absolute w-12 h-12 rounded-lg bottom-1/4 left-1/3 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-500/10 to-purple-500/10 animate-bounce" />
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 text-center px-4 sm:px-6">
+      <div className="relative z-10 px-4 text-center sm:px-6">
         {/* Logo/Brand Animation */}
         <div className="mb-8 sm:mb-12">
           <div className="relative">
@@ -144,31 +144,31 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete, duration = 3000 }) =>
             
             {/* Rotating Rings */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-20 h-20 sm:w-32 sm:h-32 border-2 border-blue-400/30 rounded-full animate-spin-slow" />
+              <div className="w-20 h-20 border-2 rounded-full sm:w-32 sm:h-32 border-blue-400/30 animate-spin-slow" />
             </div>
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-24 h-24 sm:w-40 sm:h-40 border border-purple-400/20 rounded-full animate-spin-reverse" />
+              <div className="w-24 h-24 border rounded-full sm:w-40 sm:h-40 border-purple-400/20 animate-spin-reverse" />
             </div>
           </div>
           
-          <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2 animate-fade-in">
-            Ray<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Design</span>
+          <h1 className="mb-2 text-2xl font-bold text-white sm:text-4xl animate-fade-in">
+            Ray<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400"> Design Digital</span>
           </h1>
-          <p className="text-blue-200 text-sm sm:text-lg animate-fade-in-delay">
+          <p className="text-sm text-blue-200 sm:text-lg animate-fade-in-delay">
             Crafting Digital Excellence
           </p>
         </div>
 
         {/* Progress Bar */}
-        <div className="w-72 sm:w-80 mx-auto mb-6 sm:mb-8">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-blue-200 text-xs sm:text-sm font-medium">{currentText}</span>
-            <span className="text-blue-200 text-xs sm:text-sm font-mono">{Math.round(progress)}%</span>
+        <div className="mx-auto mb-6 w-72 sm:w-80 sm:mb-8">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs font-medium text-blue-200 sm:text-sm">{currentText}</span>
+            <span className="font-mono text-xs text-blue-200 sm:text-sm">{Math.round(progress)}%</span>
           </div>
           
           <div className="relative h-1.5 sm:h-2 bg-slate-800/50 rounded-full overflow-hidden backdrop-blur-sm">
             <div
-              className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full transition-all duration-300 ease-out"
+              className="absolute top-0 left-0 h-full transition-all duration-300 ease-out rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500"
               style={{ width: `${progress}%` }}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
@@ -195,7 +195,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete, duration = 3000 }) =>
           {[...Array(3)].map((_, i) => (
             <div
               key={i}
-              className="w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-bounce"
+              className="w-2 h-2 rounded-full sm:w-3 sm:h-3 bg-gradient-to-r from-blue-400 to-purple-400 animate-bounce"
               style={{ animationDelay: `${i * 0.2}s` }}
             />
           ))}
@@ -203,11 +203,11 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete, duration = 3000 }) =>
       </div>
 
       {/* Bottom Decoration */}
-      <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2">
-        <div className="flex items-center space-x-2 text-blue-300/60 text-xs sm:text-sm">
-          <div className="w-6 sm:w-8 h-px bg-gradient-to-r from-transparent to-blue-400" />
+      <div className="absolute transform -translate-x-1/2 bottom-4 sm:bottom-8 left-1/2">
+        <div className="flex items-center space-x-2 text-xs text-blue-300/60 sm:text-sm">
+          <div className="w-6 h-px sm:w-8 bg-gradient-to-r from-transparent to-blue-400" />
           <span>Powered by Innovation</span>
-          <div className="w-6 sm:w-8 h-px bg-gradient-to-l from-transparent to-blue-400" />
+          <div className="w-6 h-px sm:w-8 bg-gradient-to-l from-transparent to-blue-400" />
         </div>
       </div>
 

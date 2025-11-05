@@ -24,39 +24,39 @@
     @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
   }
   
-  /* Black text for all paragraph elements within div containers */
-  div p {
+  /* Black text for all paragraph elements within div containers, except footer */
+  div p:not(footer p):not(footer * p) {
     color: #000000 !important;
   }
   
-  /* Ensure consistency across all states */
-  div p:hover,
-  div p:active,
-  div p:focus {
+  /* Ensure consistency across all states, except footer */
+  div p:not(footer p):not(footer * p):hover,
+  div p:not(footer p):not(footer * p):active,
+  div p:not(footer p):not(footer * p):focus {
     color: #000000 !important;
   }
   
-  /* Black text for all div elements */
-  div {
+  /* Black text for all div elements, except footer */
+  div:not(footer):not(footer *) {
     color: #000000 !important;
   }
   
-  /* Ensure consistency across all states for divs */
-  div:hover,
-  div:active,
-  div:focus {
+  /* Ensure consistency across all states for divs, except footer */
+  div:not(footer):not(footer *):hover,
+  div:not(footer):not(footer *):active,
+  div:not(footer):not(footer *):focus {
     color: #000000 !important;
   }
   
-  /* Black text for all span elements */
-  span {
+  /* Black text for all span elements, except footer */
+  span:not(footer span):not(footer * span) {
     color: #000000 !important;
   }
   
-  /* Ensure consistency across all states for spans */
-  span:hover,
-  span:active,
-  span:focus {
+  /* Ensure consistency across all states for spans, except footer */
+  span:not(footer span):not(footer * span):hover,
+  span:not(footer span):not(footer * span):active,
+  span:not(footer span):not(footer * span):focus {
     color: #000000 !important;
   }
   

@@ -56,13 +56,13 @@ const RayDesignLogo: React.FC<RayDesignLogoProps> = ({
       {/* Company Text */}
       {showText && (
         <div className="flex flex-col">
-          <div className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
-            <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-800 bg-clip-text text-transparent">
+          <div className="text-2xl font-bold tracking-tight md:text-3xl lg:text-4xl">
+            <span className="text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-800 bg-clip-text">
               RAY DESIGN
             </span>
           </div>
-          <div className="text-sm md:text-base lg:text-lg font-semibold text-slate-700 tracking-wider">
-            TECHNOLOGIES
+          <div className="text-lg font-semibold tracking-wider sm:text-base md:text-base lg:text-lg text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-600 drop-shadow-sm">
+            DIGITAL
           </div>
         </div>
       )}
