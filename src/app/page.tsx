@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { Menu, X, ArrowRight, Star, Users, Award, TrendingUp, Code, Smartphone, ShoppingCart, Search, Target, Share2, Palette, Lightbulb, Zap, CheckCircle, Mail, Phone, MapPin, Sparkles, Rocket, Globe, Monitor, Cpu, Database, Cloud, Layout, PenTool, BarChart3, MessageSquare, ChevronRight, ChevronLeft } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Preloader from '../components/Preloader';
@@ -12,13 +13,13 @@ import AnimatedBackground from '../components/AnimatedBackground';
 // Hero Illustration Component
 const HeroIllustration = () => (
   <div className="relative w-full h-full">
-    <img 
+    <Image
       src="https://media.istockphoto.com/id/1371339413/photo/co-working-team-meeting-concept-businessman-using-smart-phone-and-digital-tablet-and-laptop.jpg?s=612x612&w=0&k=20&c=ysEsVw3q2axYt3oVZAuQjtHRlN3lY-U_e0ikK5yKIXQ="
       alt="Professional team collaboration - modern digital workspace with laptops, tablets and smartphones showcasing web development and digital marketing solutions"
       className="w-full h-full object-cover rounded-2xl shadow-2xl"
       loading="lazy"
-      width="612"
-      height="612"
+      width={612}
+      height={612}
     />
     <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 via-transparent to-transparent rounded-2xl"></div>
   </div>
@@ -100,13 +101,13 @@ const ProjectShowcase = ({ projects, visibleSections }: ProjectShowcaseProps) =>
         style={{ animationDelay: `${index * 100}ms` }}
       >
         <div className="relative overflow-hidden">
-          <img 
-            src={project.imageUrl} 
+          <Image
+            src={project.imageUrl}
             alt={`${project.title} - ${project.description} - Professional web development project showcase`}
             className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
             loading="lazy"
-            width="400"
-            height="256"
+            width={400}
+            height={256}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <div className="absolute bottom-6 left-6 right-6">
@@ -3111,9 +3112,9 @@ const RayDesignWebsite = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div className="space-y-8">
               {[
-                { icon: <Phone className="w-6 h-6" />, title: "Phone", content: "+44 7505 670410", href: "tel:+447505670410", color: "from-blue-500 to-blue-600" },
+                { icon: <Phone className="w-6 h-6" />, title: "Phone", content: "+44 7757 202729", href: "tel:+447757202729", color: "from-blue-500 to-blue-600" },
                 { icon: <Mail className="w-6 h-6" />, title: "Email", content: "info@raydesign.uk", href: "mailto:info@raydesign.uk", color: "from-blue-600 to-blue-700" },
-                { icon: <MapPin className="w-6 h-6" />, title: "Address", content: "1-A Edmundson Street, Blackburn BB2 1HL, United Kingdom", href: null, color: "from-blue-500 to-blue-600" }
+                { icon: <MapPin className="w-6 h-6" />, title: "Address", content: "1a Townhead St, Cumnock KA18 1LA United Kingdom", href: null, color: "from-blue-500 to-blue-600" }
               ].map((item, idx) => (
                 <div key={idx} className="flex items-start gap-4 group">
                   <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-md text-white`}>
