@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 interface PreloaderProps {
   onComplete?: () => void;
@@ -13,13 +13,13 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete, duration = 3000 }) =>
   const [currentText, setCurrentText] = useState('');
   const [particles, setParticles] = useState<Array<{left: string, top: string, delay: string, duration: string}>>([]);
   
-  const loadingTexts = [
+  const loadingTexts = useMemo(() => [
     'Initializing...',
     'Loading Assets...',
     'Preparing Experience...',
     'Almost Ready...',
     'Welcome!'
-  ];
+  ], []);
 
   // Generate particles on client side only
   useEffect(() => {
@@ -54,7 +54,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete, duration = 3000 }) =>
     }, 50);
 
     return () => clearInterval(interval);
-  }, [duration, onComplete]);
+  }, [duration, onComplete, loadingTexts]);
 
   if (!isVisible) return null;
 

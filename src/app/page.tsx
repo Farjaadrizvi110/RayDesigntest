@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { Menu, X, ArrowRight, Star, Users, Award, TrendingUp, Code, Smartphone, ShoppingCart, Search, Target, Share2, Palette, Lightbulb, Zap, CheckCircle, Mail, Phone, MapPin, Sparkles, Rocket, Globe, Monitor, Cpu, Database, Cloud, Layout, PenTool, BarChart3, MessageSquare, ChevronRight, ChevronLeft } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Preloader from '../components/Preloader';
@@ -12,13 +13,13 @@ import AnimatedBackground from '../components/AnimatedBackground';
 // Hero Illustration Component
 const HeroIllustration = () => (
   <div className="relative w-full h-full">
-    <img 
+    <Image
       src="https://media.istockphoto.com/id/1371339413/photo/co-working-team-meeting-concept-businessman-using-smart-phone-and-digital-tablet-and-laptop.jpg?s=612x612&w=0&k=20&c=ysEsVw3q2axYt3oVZAuQjtHRlN3lY-U_e0ikK5yKIXQ="
       alt="Professional team collaboration - modern digital workspace with laptops, tablets and smartphones showcasing web development and digital marketing solutions"
       className="w-full h-full object-cover rounded-2xl shadow-2xl"
       loading="lazy"
-      width="612"
-      height="612"
+      width={612}
+      height={612}
     />
     <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 via-transparent to-transparent rounded-2xl"></div>
   </div>
@@ -100,13 +101,13 @@ const ProjectShowcase = ({ projects, visibleSections }: ProjectShowcaseProps) =>
         style={{ animationDelay: `${index * 100}ms` }}
       >
         <div className="relative overflow-hidden">
-          <img 
-            src={project.imageUrl} 
+          <Image
+            src={project.imageUrl}
             alt={`${project.title} - ${project.description} - Professional web development project showcase`}
             className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
             loading="lazy"
-            width="400"
-            height="256"
+            width={400}
+            height={256}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <div className="absolute bottom-6 left-6 right-6">
@@ -1079,12 +1080,51 @@ const RayDesignWebsite = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    // Simple form submission without email functionality
-    alert('Thank you for your message! We have received your inquiry and will get back to you soon.');
-    setFormData({ name: '', email: '', service: 'Web Development', message: '' });
+    const { name, email, message, service } = formData;
+
+    const newErrors: { name?: string; email?: string; message?: string } = {};
+    if (!name.trim()) newErrors.name = 'Name is required';
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.trim()) newErrors.email = 'Email is required';
+    else if (!emailPattern.test(email)) newErrors.email = 'Enter a valid email address';
+    if (!message.trim()) newErrors.message = 'Message is required';
+
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) return;
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    try {
+      const res = await fetch('https://submit-form.com/c7uKUravD', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          service,
+          _subject: 'New Website Inquiry',
+          _source: 'raydesign'
+        })
+      });
+
+      if (!res.ok) throw new Error('Submission failed');
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', service: 'Web Development', message: '' });
+    } catch (err) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   // Service Page Component
@@ -2367,7 +2407,7 @@ const RayDesignWebsite = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 overflow-hidden">
+    <main className="min-h-screen bg-white text-slate-900 overflow-hidden">
 
       {/* Navigation */}
       <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white shadow-lg' : 'bg-white/80 backdrop-blur-lg'}`}>
@@ -3111,9 +3151,9 @@ const RayDesignWebsite = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div className="space-y-8">
               {[
-                { icon: <Phone className="w-6 h-6" />, title: "Phone", content: "+44 7505 670410", href: "tel:+447505670410", color: "from-blue-500 to-blue-600" },
+                { icon: <Phone className="w-6 h-6" />, title: "Phone", content: "+44 7757 202729", href: "tel:+447757202729", color: "from-blue-500 to-blue-600" },
                 { icon: <Mail className="w-6 h-6" />, title: "Email", content: "info@raydesign.uk", href: "mailto:info@raydesign.uk", color: "from-blue-600 to-blue-700" },
-                { icon: <MapPin className="w-6 h-6" />, title: "Address", content: "1-A Edmundson Street, Blackburn BB2 1HL, United Kingdom", href: null, color: "from-blue-500 to-blue-600" }
+                { icon: <MapPin className="w-6 h-6" />, title: "Address", content: "1a Townhead St, Cumnock KA18 1LA United Kingdom", href: null, color: "from-blue-500 to-blue-600" }
               ].map((item, idx) => (
                 <div key={idx} className="flex items-start gap-4 group">
                   <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-md text-white`}>
@@ -3141,7 +3181,7 @@ const RayDesignWebsite = () => {
             </div>
             
             <div className="bg-white rounded-3xl p-10 shadow-xl border border-slate-200">
-              <div className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit} noValidate>
                 <div>
                   <label className="block text-sm font-semibold mb-2 text-slate-700">Name</label>
                   <input 
@@ -3150,7 +3190,11 @@ const RayDesignWebsite = () => {
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
                     className="w-full px-5 py-4 bg-slate-50 border border-slate-300 rounded-xl focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none transition-all text-slate-900 placeholder-slate-400"
                     placeholder="Your name"
+                    required
+                    aria-invalid={Boolean(errors.name)}
+                    aria-describedby={errors.name ? 'name-error' : undefined}
                   />
+                  {errors.name && <p id="name-error" className="mt-2 text-sm text-red-600">{errors.name}</p>}
                 </div>
                 
                 <div>
@@ -3161,7 +3205,11 @@ const RayDesignWebsite = () => {
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
                     className="w-full px-5 py-4 bg-slate-50 border border-slate-300 rounded-xl focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none transition-all text-slate-900 placeholder-slate-400"
                     placeholder="your@email.com"
+                    required
+                    aria-invalid={Boolean(errors.email)}
+                    aria-describedby={errors.email ? 'email-error' : undefined}
                   />
+                  {errors.email && <p id="email-error" className="mt-2 text-sm text-red-600">{errors.email}</p>}
                 </div>
                 
                 <div>
@@ -3188,20 +3236,33 @@ const RayDesignWebsite = () => {
                     onChange={(e) => setFormData({...formData, message: e.target.value})}
                     className="w-full px-5 py-4 bg-slate-50 border border-slate-300 rounded-xl focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none transition-all resize-none text-slate-900 placeholder-slate-400"
                     placeholder="Tell us about your project..."
+                    required
+                    aria-invalid={Boolean(errors.message)}
+                    aria-describedby={errors.message ? 'message-error' : undefined}
                   />
+                  {errors.message && <p id="message-error" className="mt-2 text-sm text-red-600">{errors.message}</p>}
                 </div>
                 
                 <button 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleSubmit(e as any);
-                  }}
-                  className="w-full bg-blue-600 text-white px-8 py-5 rounded-xl text-lg font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center gap-3 group shadow-lg hover:shadow-xl"
+                  type="submit"
+                  className="w-full bg-blue-600 text-white px-8 py-5 rounded-xl text-lg font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center gap-3 group shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed"
+                  disabled={isSubmitting}
+                  aria-live="polite"
                 >
-                  Send Message 
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
                 </button>
-              </div>
+                {submitStatus === 'success' && (
+                  <div className="mt-4 rounded-lg bg-green-50 border border-green-200 px-4 py-3 text-green-700" role="status">
+                    Thank you! Your message has been sent successfully.
+                  </div>
+                )}
+                {submitStatus === 'error' && (
+                  <div className="mt-4 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-red-700" role="alert">
+                    Sorry, something went wrong. Please try again later or email us directly.
+                  </div>
+                )}
+              </form>
             </div>
           </div>
         </div>
@@ -3233,7 +3294,7 @@ const RayDesignWebsite = () => {
       ) : (
         <ServicePage service={services.find(s => s.id === currentPage)} />
       )}
-    </div>
+    </main>
   );
 };
 

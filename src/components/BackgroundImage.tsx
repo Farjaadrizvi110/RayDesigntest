@@ -21,17 +21,12 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({
       style={{
         backgroundImage: `url(${src})`
       }}
+      role="img"
+      aria-label={alt}
     >
       <div className="relative z-10">
         {children}
       </div>
-      {/* Hidden img for accessibility */}
-      <img 
-        src={src} 
-        alt={alt} 
-        className="sr-only" 
-        aria-hidden="true"
-      />
     </div>
   );
 };
