@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import PerformanceOptimizer from '../components/PerformanceOptimizer'
+import Chatbot from '../components/Chatbot'
 import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -205,6 +206,7 @@ export default function RootLayout({
         )}
         <PerformanceOptimizer />
         {children}
+        <Chatbot />
         <a
           href="https://wa.me/447557202729"
           target="_blank"
